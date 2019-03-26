@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>上传图片</title>
+<link href="./LXXUploadNeeded/LXXUploadPic.css" rel="stylesheet" type="text/css">
+<script src="./LXXUploadNeeded/jquery-2.2.1.js"></script>
+<script src="./LXXUploadNeeded/LXXUploadPic.js"></script>
+<meta charset="UTF-8">
+<title>Button</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+<link rel="stylesheet" href="css/ydui.css?rev=@@hash"/>
+<link rel="stylesheet" href="css/demo.css"/>
+<script src="js/ydui.flexible.js"></script>
+</head>
+<body>
+
+<header class="m-navbar demo-small-pitch">
+    <a href="index.php" class="navbar-item"><i class="back-ico"></i>返回</a>
+    <div class="navbar-center">
+        <img src="logo2.png" alt="">
+    </div>
+</header>
+
+
+
+
+
+<section class="g-flexview">
+
+
+    <form action="handle.php"  method="post" enctype="multipart/form-data">
+<div id="LXXUploadPic" LXXCol="1" LXXRow="1" LXXWidth="375" LXXHeight="240"></div>
+
+        <input type="file" name="file" id = "file"  />
+
+
+     <section class="g-scrollview">
+
+         <div class="m-button">
+            <!-- <input type="submit" name="submit" value="上传" /> -->
+             <button type="submit" name="submit" class="btn-block btn-primary">上传</button>
+
+         </div>
+
+     </section>
+   </form>
+ </section>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="../js/ydui.js"></script>
+</body>
+</html>

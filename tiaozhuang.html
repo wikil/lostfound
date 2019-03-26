@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>注册成功！</title>
+    <style type="text/css">
+      .center{
+          /* width:50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -moz-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); */
+
+          position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  width:50%;
+  height: 50%;
+-webkit-transform: translateX(-50%) translateY(-50%);
+      }
+   </style>
+
+
+  </head>
+  <body>
+    <script language="JavaScript" type="text/javascript">
+        function delayURL(url) {
+            var delay = document.getElementById("time").innerHTML;
+            if(delay > 0) {
+                delay--;
+                document.getElementById("time").innerHTML = delay;
+            } else {
+                window.top.location.href = url;
+            }
+           t = setTimeout("delayURL('" + url + "')", 1000);
+        }
+    function stop1(){
+    t && clearTimeout(t);
+    }
+    </script>
+    <div class="center">
+
+  <h1>注册成功！<br><span id="time" style="background: #00BFFF">3</span>秒钟后自动跳转<br>如果不跳转<br>请点击下面的链接<a href="denglu.html">登陆</a></h1>
+    <input type="button" value="停止跳转" onclick="stop1();"> </div>
+    <script type="text/javascript">
+    delayURL("denglu.html");
+    </script>
+  </body>
+</html>
