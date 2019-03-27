@@ -21,17 +21,32 @@
         $school = $_POST['school'];
         $txt_hyan = $_POST['txt_hyan'];
         $txt_yan = $_POST['txt_yan'];
+        $vcode = $_POST['vcode'];
 
-
+        //读取手机验证码
+        $code_sql = "select vcode,date from vcode where tel = '$tel' order by date desc'";
+        $code_res = $conn->query($code_sql);
+        $row= $code_res->fetch_array();
+        $new_vcode = $row['vcode'];
+        $code_time = $row['date'];
 
         $sql="select * from register where id='$idnew'";
         $rs=mysqli_query($conn,$sql);
 
         $arr = mysqli_fetch_array($rs,MYSQL_ASSOC);
          echo mysql_error();
-        if ($name && $password && $idnew && $tel && $repeat_password && $school && $txt_yan){
+        if ($name && $password && $idnew && $tel && $repeat_password && $school && $txt_yan && $vcode){
           //如果用户名和密码都不为空
-          if (!($txt_hyan==$txt_yan))
+
+          if (!($new_vcode==$vcode)){
+              echo '<script language="JavaScript">;
+                   alert("手机验证码输入错误");
+                   location.href="login.php";</script>;';
+          } else if(date("Y/m/d G:i:s")-$code_time>1800) {
+              echo '<script language="JavaScript">;
+                   alert("手机验证码超时");
+                   location.href="login.php";</script>;';
+          } else if (!($txt_hyan==$txt_yan))
           {
             echo '<script language="JavaScript">;
                    alert("验证码输入错误");
@@ -56,16 +71,15 @@
                     location.href="login.php";</script>;';
 
             }
-              else
-            {
+              else {
+
               $q="insert into register (id,name,password,tel,school) values ('$idnew','$name','$password','$tel','$school')";//向数据库插入表单传来的值的sql
               $reslut=mysqli_query($conn,$q);//执行sql
-              if (!$reslut)
-            {
-              die('Error: ' . mysqli_error());//如果sql执行失败输出错误
+              if (!$reslut) {
+                die('Error: ' . mysqli_error());//如果sql执行失败输出错误
 
               }else{
-                echo '<script language="JavaScript">;alert("注册成功!");location.href="denglu.html";</script>;';
+                  echo '<script language="JavaScript">;alert("注册成功!");location.href="denglu.html";</script>;';
               //  echo "注册成功";//成功输出注册成功
               //  header("Location: tiaozhuang.html");//跳转到登陆界面
               }
