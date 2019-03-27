@@ -73,7 +73,11 @@ Bootstrap -->
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="account" name="tel" placeholder="手机号" autocomplete="off" aria-required="true" data-tip="英文字母数字或下划线">
+              <input type="text" class="form-control tel" id="account" name="tel"  placeholder="手机号" autocomplete="off" aria-required="true" data-tip="英文字母数字或下划线">
+              <a  href="#" id="send_code" class="codelink">发送验证码</a>
+            </div>
+            <div class="form-group">
+                  <input type="text" class="form-control" id="vcode" name="vcode" placeholder="验证码" autocomplete="off" aria-required="true" data-tip="您收到的验证码">
             </div>
             <div class="form-group">
               <input type="password" class="form-control" id="password" name="password" placeholder="密码" aria-required="true" data-tip="请设置您的密码（6-16个字符）">
@@ -133,6 +137,32 @@ Bootstrap -->
             'margin-top': -(intro.height() / 2 + 100)
         });
     });
+    var count=45;
+    $("#send_code").click(
+        function () {
+            var phone_number = document.getElementsByClassName("tel")[0].value;
+            if(document.getElementById("send_code").innerText==="发送验证码"){
+                $.post("message.php",
+                    {tel:phone_number},
+                    function (data) {
+                        if(data){
+                            var countdown = setInterval(CountDown, 1000);
+                            function CountDown() {
+                                var e = document.getElementById("send_code");
+                                e.innerText = count+"秒后重新发送";
+                                if (count === 0) {
+                                    e.innerText = "发送验证码";
+                                    count = 45;
+                                    clearInterval(countdown);
+                                }
+                                count--;
+                            }
+                        }
+                    }
+                )
+            }
+        }
+    );
 </script>
 <div style="text-align:center;">
 <p>来源:<a href="http://down.admin5.com/" target="_blank">A5源码</a></p>
